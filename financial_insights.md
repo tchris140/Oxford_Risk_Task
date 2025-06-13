@@ -82,6 +82,8 @@ This document provides key insights and analysis from our study of financial per
 - Confidence vs Total Assets: -0.11
 - Composure vs Total Assets: -0.11
 
+The graph below illustrates the relationship between personality traits and the number of investments. It shows that individuals with higher risk tolerance and confidence tend to have more investments, while those with higher composure may have fewer investments. This suggests that personality traits can influence investment behavior, with risk-taking individuals more likely to diversify their portfolios.
+
 ![Investment Behavior](visualizations/personality_vs_num_investments.png)
 
 ## 5. Asset Value Distribution by Currency
