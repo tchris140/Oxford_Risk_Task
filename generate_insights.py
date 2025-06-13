@@ -134,7 +134,7 @@ def generate_investment_behavior_insights(assets_df, personality_df):
         corr = personality_df[trait].corr(assets_df.groupby('_id')['asset_value_gbp'].sum())
         insights.append(f"- {trait.replace('_', ' ').title()} vs Total Assets: {corr:.2f}")
     
-    insights.append("\n![Investment Behavior](visualizations/investment_behavior.png)")
+    insights.append("\n![Investment Behavior](visualizations/personality_vs_num_investments.png)")
     
     return "\n".join(insights)
 

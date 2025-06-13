@@ -82,7 +82,7 @@ This document provides key insights and analysis from our study of financial per
 - Confidence vs Total Assets: -0.11
 - Composure vs Total Assets: -0.11
 
-![Investment Behavior](visualizations/investment_behavior.png)
+![Investment Behavior](visualizations/personality_vs_num_investments.png)
 
 ## 5. Asset Value Distribution by Currency
 
