@@ -236,16 +236,6 @@ def main():
     
     print("Analyzing personality traits vs number of investments...")
     analyze_personality_vs_num_investments(personality_df, assets_df)
-    
-    # Save combined dataset for further analysis
-    combined_df = pd.merge(
-        assets_df.groupby('_id')['asset_value'].sum().reset_index(),
-        personality_df,
-        on='_id',
-        how='inner'
-    )
-    combined_df.to_csv('csv_files/combined_analysis.csv', index=False)
-    
-    print("\nAnalysis complete! Check the generated visualizations and csv_files/combined_analysis.csv for results.")
+
 if __name__ == "__main__":
     main() 

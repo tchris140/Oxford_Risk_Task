@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 import os
+from financial_analysis import find_highest_gbp_assets
 
 def setup_visualization_style():
     """Set up the visualization style for all plots."""
@@ -14,14 +15,21 @@ def load_data():
     """Load all required datasets."""
     personality_df = pd.read_csv('csv_files/personality.csv')
     assets_df = pd.read_csv('csv_files/assets_gbp.csv')
-    combined_df = pd.read_csv('csv_files/combined_analysis.csv')
     
     # Print column names for debugging
     print("Assets DataFrame columns:", assets_df.columns.tolist())
     print("Personality DataFrame columns:", personality_df.columns.tolist())
-    print("Combined DataFrame columns:", combined_df.columns.tolist())
     
-    return personality_df, assets_df, combined_df
+    return personality_df, assets_df
+
+def generate_highest_asset_holder_insights(assets_df, personality_df):
+    insights = []
+    # Find the person with the highest total assets
+    highest_gbp_amount, risk_tolerance = find_highest_gbp_assets(personality_df, assets_df)
+    insights.append("## Highest Asset Holder\n")
+    insights.append(f"- Highest Asset Value: £{highest_gbp_amount:,.2f}")
+    insights.append(f"- Risk Tolerance: {risk_tolerance:.2f}")
+    return "\n".join(insights)
 
 def generate_asset_distribution_insights(assets_df):
     """Generate insights about asset distribution."""
@@ -107,7 +115,7 @@ def generate_personality_insights(personality_df):
     
     return "\n".join(insights)
 
-def generate_investment_behavior_insights(assets_df, combined_df):
+def generate_investment_behavior_insights(assets_df, personality_df):
     """Generate insights about investment behavior."""
     insights = []
     
@@ -123,19 +131,32 @@ def generate_investment_behavior_insights(assets_df, combined_df):
     # Correlation with personality traits
     insights.append("\n### Investment Behavior and Personality:")
     for trait in ['risk_tolerance', 'confidence', 'composure']:
-        # Use 'asset_value' for total assets in combined_df
-        corr = combined_df[trait].corr(combined_df['asset_value'])
+        corr = personality_df[trait].corr(assets_df.groupby('_id')['asset_value_gbp'].sum())
         insights.append(f"- {trait.replace('_', ' ').title()} vs Total Assets: {corr:.2f}")
     
     insights.append("\n![Investment Behavior](visualizations/investment_behavior.png)")
     
     return "\n".join(insights)
 
+def generate_asset_value_by_currency_insights(assets_df):
+    insights = []
+    insights.append("\n## 5. Asset Value Distribution by Currency\n")
+    currency_dist = assets_df['asset_currency'].value_counts()
+    insights.append("### Asset Value by Currency:")
+    for currency, count in currency_dist.items():
+        total_value = assets_df[assets_df['asset_currency'] == currency]['asset_value_gbp'].sum()
+        percentage = (count / len(assets_df)) * 100
+        insights.append(f"- {currency}:")
+        insights.append(f"  - Count: {count} ({percentage:.1f}%)")
+        insights.append(f"  - Total value: £{total_value:,.2f}")
+    insights.append("\n![Asset Value by Currency](visualizations/assets_distribution.png)")
+    return "\n".join(insights)
+
 def generate_summary_findings():
     """Generate a summary of all key findings."""
     insights = []
     
-    insights.append("\n## 5. Summary of Key Findings\n")
+    insights.append("\n## 6. Summary of Key Findings\n")
     
     insights.append("### Asset Distribution")
     insights.append("- Most investments are of moderate value")
@@ -168,7 +189,7 @@ def main():
     """Main function to generate all insights and save to markdown file."""
     # Setup
     setup_visualization_style()
-    personality_df, assets_df, combined_df = load_data()
+    personality_df, assets_df = load_data()
     
     # Generate insights
     insights = []
@@ -176,10 +197,12 @@ def main():
     insights.append("This document provides key insights and analysis from our study of financial personality traits and asset holdings.\n")
     
     # Add each section
+    insights.append(generate_highest_asset_holder_insights(assets_df, personality_df))
     insights.append(generate_asset_distribution_insights(assets_df))
     insights.append(generate_asset_class_insights(assets_df))
     insights.append(generate_personality_insights(personality_df))
-    insights.append(generate_investment_behavior_insights(assets_df, combined_df))
+    insights.append(generate_investment_behavior_insights(assets_df, personality_df))
+    insights.append(generate_asset_value_by_currency_insights(assets_df))
     insights.append(generate_summary_findings())
     
     # Save to markdown file

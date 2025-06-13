@@ -2,6 +2,10 @@
 
 This document provides key insights and analysis from our study of financial personality traits and asset holdings.
 
+## Highest Asset Holder
+
+- Highest Asset Value: £542.86
+- Risk Tolerance: 0.56
 ## 1. Asset Distribution Analysis
 
 - Total assets value: £139,928.81
@@ -74,13 +78,34 @@ This document provides key insights and analysis from our study of financial per
 - Maximum investments per person: 5
 
 ### Investment Behavior and Personality:
-- Risk Tolerance vs Total Assets: -0.07
-- Confidence vs Total Assets: -0.06
-- Composure vs Total Assets: -0.02
+- Risk Tolerance vs Total Assets: -0.11
+- Confidence vs Total Assets: -0.11
+- Composure vs Total Assets: -0.11
 
 ![Investment Behavior](visualizations/investment_behavior.png)
 
-## 5. Summary of Key Findings
+## 5. Asset Value Distribution by Currency
+
+### Asset Value by Currency:
+- AUD:
+  - Count: 168 (21.4%)
+  - Total value: £29,367.26
+- JPY:
+  - Count: 162 (20.6%)
+  - Total value: £25,761.39
+- USD:
+  - Count: 160 (20.4%)
+  - Total value: £29,309.24
+- EUR:
+  - Count: 152 (19.3%)
+  - Total value: £28,376.20
+- GBP:
+  - Count: 144 (18.3%)
+  - Total value: £27,114.72
+
+![Asset Value by Currency](visualizations/assets_distribution.png)
+
+## 6. Summary of Key Findings
 
 ### Asset Distribution
 - Most investments are of moderate value

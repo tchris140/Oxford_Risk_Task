@@ -11,8 +11,7 @@ Oxford_Risk_Task/
 ├── csv_files/              # Directory containing all CSV data files
 │   ├── personality.csv     # Personality trait data
 │   ├── assets.csv         # Raw assets data
-│   ├── assets_gbp.csv     # Assets data converted to GBP
-│   └── combined_analysis.csv  # Merged dataset for analysis
+│   └── assets_gbp.csv     # Assets data converted to GBP
 ├── visualizations/         # Directory containing all generated visualizations
 ├── download_datasets.py    # Script to download and prepare datasets
 ├── data_quality_check.py   # Script for data quality analysis
@@ -90,7 +89,6 @@ python download_datasets.py
 
 ### CSV Files
 - `assets_gbp.csv`: Assets data with values converted to GBP
-- `combined_analysis.csv`: Merged dataset for comprehensive analysis
 
 ### Visualizations
 All visualizations are saved in the `visualizations/` directory:
